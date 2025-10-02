@@ -21,41 +21,42 @@
 
 def question2():
     answerDiscount = 0.9
-    answerNoise = 0.2
+    answerNoise = 0 #0.2 originally
     return answerDiscount, answerNoise
 
-def question3a():
-    answerDiscount = None
-    answerNoise = None
-    answerLivingReward = None
+def question3a(): #closer exit, riskier path
+    answerDiscount = 0.1 #smaller number = prefer closer rewards
+    answerNoise = 0 #randomness
+    answerLivingReward = -0.1 #neg = prefer shorter paths, pos = doesn't mind taking longer
     return answerDiscount, answerNoise, answerLivingReward
     # If not possible, return 'NOT POSSIBLE'
 
-def question3b():
-    answerDiscount = None
-    answerNoise = None
-    answerLivingReward = None
+#TO DO: 3B AND 3D
+def question3b(): #closer exit, safer path
+    answerDiscount = 0.1
+    answerNoise = 0.5
+    answerLivingReward = 0.9
     return answerDiscount, answerNoise, answerLivingReward
     # If not possible, return 'NOT POSSIBLE'
 
-def question3c():
-    answerDiscount = None
-    answerNoise = None
-    answerLivingReward = None
+def question3c(): #farther exit, riskier path
+    answerDiscount = 0.9
+    answerNoise = 0
+    answerLivingReward = -0.1
     return answerDiscount, answerNoise, answerLivingReward
     # If not possible, return 'NOT POSSIBLE'
 
-def question3d():
-    answerDiscount = None
-    answerNoise = None
-    answerLivingReward = None
+def question3d(): #farther exit, safer path
+    answerDiscount = None #0.9
+    answerNoise = None #0.6
+    answerLivingReward = None #-#0.1
     return answerDiscount, answerNoise, answerLivingReward
     # If not possible, return 'NOT POSSIBLE'
 
 def question3e():
-    answerDiscount = None
-    answerNoise = None
-    answerLivingReward = None
+    answerDiscount = 1
+    answerNoise = 0.5
+    answerLivingReward = 1
     return answerDiscount, answerNoise, answerLivingReward
     # If not possible, return 'NOT POSSIBLE'
 
