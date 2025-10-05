@@ -169,9 +169,11 @@ class PacmanQAgent(QLearningAgent):
         informs parent of action for Pacman.  Do not change or remove this
         method.
         """
-        action = QLearningAgent.getAction(self,state)
-        self.doAction(state,action)
-        return action
+        action = QLearningAgent.getAction(self,state) # was this already here idk?
+        if util.flipCoin(self.epsilon): # use the episilon probability to choose a random action
+            return random.choice(action)
+
+        return self.computeActionFromQValues(state) # otherwise we can get the best action from Q-values
 
 
 class ApproximateQAgent(PacmanQAgent):
