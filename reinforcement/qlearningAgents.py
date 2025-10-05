@@ -43,6 +43,7 @@ class QLearningAgent(ReinforcementAgent):
         ReinforcementAgent.__init__(self, **args)
 
         "*** YOUR CODE HERE ***"
+        self.qvalues = util.Counter()
 
     def getQValue(self, state, action):
         """
@@ -51,7 +52,7 @@ class QLearningAgent(ReinforcementAgent):
           or the Q node value otherwise
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        return self.qvalues[(state, action)] # just reutrn the q valuef or the state action pair
 
 
     def computeValueFromQValues(self, state):
@@ -62,7 +63,12 @@ class QLearningAgent(ReinforcementAgent):
           terminal state, you should return a value of 0.0.
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        legal = self.getLegalActions(state)
+
+        if not legal:
+            return 0.0
+        else:
+            return max(self.getQValue(state, action) for action in legal)
 
     def computeActionFromQValues(self, state):
         """
@@ -71,7 +77,22 @@ class QLearningAgent(ReinforcementAgent):
           you should return None.
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        legal = self.getLegalActions(state)
+        if len(legal) == 0:
+            return None # no elgal actions mean we are in the terminal state
+        
+        max = float('-inf')
+        best = []
+
+        for i in legal:
+            q_value = self.getQValue(state, i)
+            if q_value > max:
+                max = q_value # for a better action reset the list
+                best = [i]
+            elif q_value == max: #iif we have a tie we can instead add this action to the best list
+                best.append(i)
+        return random.choice(best)
+
 
     def getAction(self, state):
         """
@@ -88,7 +109,9 @@ class QLearningAgent(ReinforcementAgent):
         legalActions = self.getLegalActions(state)
         action = None
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        if util.flipCoin(self.epsilon): # use the probability epsilon to tkae a random action
+            return random.choice(legalActions)
+        return self.computeActionFromQValues(state) # else take the best policy action
 
         return action
 
@@ -102,7 +125,15 @@ class QLearningAgent(ReinforcementAgent):
           it will be called on your behalf
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        # look up equation for Q-learning update 
+        # we have the immediate reward for the action with the discounted value for the next action
+        example = reward + (self.discount * self.computeValueFromQValues(nextState))
+        # then we can get the old q value from the state action pair
+        old = self.getQValue(state, action)
+        # updat ehte q-value with the weighted average by keeping most of the old value and add the new value
+        new = (1-self.alpha) * old + self.alpha * example
+        # then store this new Q value into the table
+        self.qvalues[(state, action)] = new
 
     def getPolicy(self, state):
         return self.computeActionFromQValues(state)
