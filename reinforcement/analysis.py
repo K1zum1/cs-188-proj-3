@@ -33,9 +33,9 @@ def question3a(): #closer exit, riskier path
 
 #TO DO: 3B AND 3D
 def question3b(): #closer exit, safer path
-    answerDiscount = 0.1
-    answerNoise = 0.5
-    answerLivingReward = 0.9
+    answerDiscount = 0.2
+    answerNoise = 0.1
+    answerLivingReward = 0
     return answerDiscount, answerNoise, answerLivingReward
     # If not possible, return 'NOT POSSIBLE'
 
@@ -47,9 +47,9 @@ def question3c(): #farther exit, riskier path
     # If not possible, return 'NOT POSSIBLE'
 
 def question3d(): #farther exit, safer path
-    answerDiscount = None #0.9
-    answerNoise = None #0.6
-    answerLivingReward = None #-#0.1
+    answerDiscount = 1
+    answerNoise = 0.5
+    answerLivingReward = 0
     return answerDiscount, answerNoise, answerLivingReward
     # If not possible, return 'NOT POSSIBLE'
 
@@ -61,8 +61,10 @@ def question3e():
     # If not possible, return 'NOT POSSIBLE'
 
 def question7():
-    return 'NOT POSSIBLE'
-
+    answerEpsilon = None
+    answerLearningRate = None
+    return answerEpsilon, answerLearningRate
+    # If not possible, return 'NOT POSSIBLE'
 
 if __name__ == '__main__':
     print('Answers to analysis questions:')
